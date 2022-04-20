@@ -63,4 +63,11 @@
 .read{
   grid-area: readContent;
 }
-
+form{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(2,1fr);
+  height: 100px;
+  align-items: flex-end;
+  background-color: hsl(0, 0, 80  , 1 )
+}

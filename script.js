@@ -1,5 +1,7 @@
 const booksContainer = document.getElementById("booksContainer");
-
+const form = document.getElementById("newBookEntry");
+const submitButton = document.getElementById("submitNewBookForm");
+form.onsubmit = addBookToLibrary;
 let myLibrary = JSON.parse(localStorage.getItem("library"))
 if (myLibrary === null){
   myLibrary = [];
@@ -14,10 +16,13 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+function addBookToLibrary(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  myLibrary.push(new Book(...formData.values()));
   localStorage.setItem("library", JSON.stringify(myLibrary));
   updateDOM();
+  form.reset()
 }
 
 function makeCard(book, index) {
