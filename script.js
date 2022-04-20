@@ -45,11 +45,13 @@ function makeCard(book, index) {
   booksContainer.appendChild(card);
 }
 
-function deleteCard(e){
-  index = +e.target.parentElement.id;
-  myLibrary = myLibrary.slice(0,index).concat(myLibrary.slice(+index+1));
-  localStorage.setItem("library", JSON.stringify(myLibrary))
-  updateDOM()
+function deleteCard(e) {
+  if (confirm("Are you sure that you want to delete that book?")) {
+    index = +e.target.parentElement.id;
+    myLibrary = myLibrary.slice(0, index).concat(myLibrary.slice(+index + 1));
+    localStorage.setItem("library", JSON.stringify(myLibrary))
+    updateDOM()
+  }
 }
 
 function updateDOM() {
