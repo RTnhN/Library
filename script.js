@@ -16,6 +16,8 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleReadStatus = function(){ this.read =  !this.read}
+
 function addBookToLibrary(e) {
   e.preventDefault();
   const formData = new FormData(form);
@@ -26,16 +28,26 @@ function addBookToLibrary(e) {
 }
 
 function makeCard(book, index) {
-  let CardContent = [["Title:", "titleLabel"], [book.title, "title"], ["delete", "deleteButton"], ["Author:", "authorLabel"], [book.author, "author"], ["Pages:", "pagesLabel"], [book.pages, "pages"], ["Read: ", "readLabel"], [book.read ? "yes" : "no", "read"]];
+  let CardContent = [["Title:", "titleLabel"], [book.title, "title"], ["buttons", ""], ["Author:", "authorLabel"], [book.author, "author"], ["Pages:", "pagesLabel"], [book.pages, "pages"], ["Read: ", "readLabel"], [book.read ? "yes" : "no", "read"]];
   const card = document.createElement("div");
   card.className = "card";
   card.id = index;
   for (const content of CardContent) {
-    if (content[0] === "delete") {
-      card.appendChild(document.createElement("button"))
-      card.lastChild.className = "material-symbols-outlined deleteButton";
-      card.lastChild.textContent = "delete";
-      card.lastChild.addEventListener("click", deleteCard);
+    if (content[0] === "buttons") {
+      const buttonsContainer = document.createElement("div");
+      buttonsContainer.className = "buttons";
+      buttonsContainer.appendChild(document.createElement("button"));
+      buttonsContainer.lastChild.className = "material-symbols-outlined readButton";
+      buttonsContainer.lastChild.textContent = "check_box";
+      buttonsContainer.lastChild.setAttribute("title", "Toggle Read Status");
+      buttonsContainer.lastChild.addEventListener("click", updateReadStatus);
+      buttonsContainer.appendChild(document.createElement("button"));
+      buttonsContainer.lastChild.className = "material-symbols-outlined deleteButton";
+      buttonsContainer.lastChild.textContent = "delete";
+      buttonsContainer.lastChild.setAttribute("title", "Delete Book from Library");
+      buttonsContainer.lastChild.addEventListener("click", deleteCard);
+      card.appendChild(buttonsContainer);
+
     } else {
       card.appendChild(document.createElement("div"));
       card.lastChild.textContent = content[0];
@@ -52,6 +64,11 @@ function deleteCard(e) {
     localStorage.setItem("library", JSON.stringify(myLibrary))
     updateDOM()
   }
+}
+
+function updateReadStatus(e){
+  myLibrary[+e.target.parentElement.id].toggleReadStatus();
+  updateDOM();
 }
 
 function updateDOM() {
