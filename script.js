@@ -3,7 +3,7 @@ const form = document.getElementById("newBookEntry");
 const submitButton = document.getElementById("submitNewBookForm");
 form.onsubmit = addBookToLibrary;
 let myLibrary = JSON.parse(localStorage.getItem("library"))
-if (myLibrary === null){
+if (myLibrary === null) {
   myLibrary = [];
 } else {
   updateDOM()
@@ -26,7 +26,7 @@ function addBookToLibrary(e) {
 }
 
 function makeCard(book, index) {
-  let CardContent = [["Title:","titleLabel"], [book.title, "title"], ["delete","deleteButton"], ["Author:","authorLabel"], [book.author, "author"], ["Pages:", "pagesLabel"], [book.pages, "pages"], ["Read: ","readLabel"], [book.read ? "yes" : "no", "read"]];
+  let CardContent = [["Title:", "titleLabel"], [book.title, "title"], ["delete", "deleteButton"], ["Author:", "authorLabel"], [book.author, "author"], ["Pages:", "pagesLabel"], [book.pages, "pages"], ["Read: ", "readLabel"], [book.read ? "yes" : "no", "read"]];
   const card = document.createElement("div");
   card.className = "card";
   card.id = index;
@@ -63,12 +63,4 @@ function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
-}
-
-function removeIndex(array, index) {
-  let arrayLength = array.length
-  if (index < 0 || index > arrayLength || index === undefined){
-    throw "Index does not exist for array";
-  }
-  return array.slice(0,+index).concat(array.slice(+index+1)) ;
 }
