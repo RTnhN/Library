@@ -1,0 +1,66 @@
+#booksContainer{
+  display:grid;
+  width: 500px;
+  height:500px;
+  background-color: lightblue;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+
+}
+
+.card{
+  display:grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  width: 200px;
+  height: 200px;
+  background-color: brown;
+  border-left: 20px solid black;
+  padding:5px;
+  box-shadow: 5px 5px 4px 2px hsl(0, 0, 0, 0.5);
+  grid-template-areas:
+  "delete delete"
+  "titleLabel titleContent"
+  "authorLabel authorContent"
+  "pagesLabel pagesContent" ew
+  "readLabel readContent";
+
+}
+
+.deleteButton{
+  grid-area: delete;
+  background:none;
+  font-size: 24px;
+  border:none;
+  width: 30px;
+  height: 30px;
+  align-self: flex-start;
+  justify-self: flex-end;
+}
+
+.titleLabel{
+  grid-area: titleLabel;
+}
+
+.title{
+  grid-area: titleContent;
+}
+.authorLabel{
+  grid-area: authorLabel;
+}
+.author{
+  grid-area: authorContent;
+}
+.pagesLabel{
+  grid-area: pagesLabel;
+}
+.pages{
+  grid-area: pagesContent;
+}
+.readLabel{
+  grid-area: readLabel;
+}
+.read{
+  grid-area: readContent;
+}
+
