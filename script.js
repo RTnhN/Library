@@ -1,7 +1,9 @@
 const booksContainer = document.getElementById("booksContainer");
 const form = document.getElementById("newBookEntry");
 const submitButton = document.getElementById("submitNewBookForm");
+const newBookButton = document.getElementById("addNewBookButton");
 form.onsubmit = addBookToLibrary;
+newBookButton.onclick = toggleNewBookForm;
 let myLibrary = JSON.parse(localStorage.getItem("library"))
 if (myLibrary === null) {
   myLibrary = [];
@@ -78,6 +80,16 @@ function updateReadStatus(e){
 function updateDOM() {
   removeAllChildNodes(booksContainer);
   myLibrary.forEach(makeCard);
+}
+
+function toggleNewBookForm(e) {
+  if (newBookButton.firstElementChild.textContent === "add"){
+    form.className = "formVisible";
+    newBookButton.firstElementChild.textContent = "remove";
+  } else {
+    form.className = "formHidden";
+    newBookButton.firstElementChild.textContent = "add";
+  }
 }
 
 function removeAllChildNodes(parent) {
