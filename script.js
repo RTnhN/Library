@@ -21,7 +21,11 @@ Book.prototype.toggleReadStatus = function(){ this.read =  !this.read}
 function addBookToLibrary(e) {
   e.preventDefault();
   const formData = new FormData(form);
-  myLibrary.push(new Book(...formData.values()));
+  const title = formData.get("title");
+  const author = formData.get("author");
+  const pages = formData.get("pages");
+  const read = formData!==null; 
+  myLibrary.push(new Book(title, author, pages, read));
   localStorage.setItem("library", JSON.stringify(myLibrary));
   updateDOM();
   form.reset()
