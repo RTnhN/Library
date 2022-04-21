@@ -63,7 +63,7 @@ function makeCard(book, index) {
 
 function deleteCard(e) {
   if (confirm("Are you sure that you want to delete that book?")) {
-    index = +e.target.parentElement.id;
+    index = +e.target.parentElement.parentElement.id;
     myLibrary = myLibrary.slice(0, index).concat(myLibrary.slice(+index + 1));
     localStorage.setItem("library", JSON.stringify(myLibrary))
     updateDOM()
@@ -71,7 +71,7 @@ function deleteCard(e) {
 }
 
 function updateReadStatus(e){
-  myLibrary[+e.target.parentElement.id].toggleReadStatus();
+  myLibrary[+e.target.parentElement.parentElement.id].toggleReadStatus();
   updateDOM();
 }
 
