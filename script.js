@@ -4,12 +4,6 @@ const submitButton = document.getElementById("submitNewBookForm");
 const newBookButton = document.getElementById("addNewBookButton");
 form.onsubmit = addBookToLibrary;
 newBookButton.onclick = toggleNewBookForm;
-let myLibrary = JSON.parse(localStorage.getItem("library"))
-if (myLibrary === null) {
-  myLibrary = [];
-} else {
-  updateDOM()
-}
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -19,6 +13,14 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.toggleReadStatus = function(){ this.read =  !this.read}
+
+let myLibrary = JSON.parse(localStorage.getItem("library"))
+if (myLibrary === null) {
+  myLibrary = [];
+} else {
+  myLibrary = myLibrary.map((value)=>Object.assign(new Book(), value))
+  updateDOM();
+}
 
 function addBookToLibrary(e) {
   e.preventDefault();
