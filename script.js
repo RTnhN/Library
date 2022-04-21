@@ -86,9 +86,11 @@ function toggleNewBookForm(e) {
   if (newBookButton.firstElementChild.textContent === "add"){
     form.className = "formVisible";
     newBookButton.firstElementChild.textContent = "remove";
+    newBookButton.lastChild.textContent = "Collapse New Book Form";
   } else {
     form.className = "formHidden";
     newBookButton.firstElementChild.textContent = "add";
+    newBookButton.lastChild.textContent = "Add New Book";
   }
 }
 
