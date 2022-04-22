@@ -5,14 +5,15 @@ const newBookButton = document.getElementById("addNewBookButton");
 form.onsubmit = addBookToLibrary;
 newBookButton.onclick = toggleNewBookForm;
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book{
+  constructor(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+  toggleReadStatus(){this.read =  !this.read}
 }
-
-Book.prototype.toggleReadStatus = function(){ this.read =  !this.read}
 
 let myLibrary = JSON.parse(localStorage.getItem("library"))
 if (myLibrary === null) {
